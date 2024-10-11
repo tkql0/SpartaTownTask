@@ -5,39 +5,32 @@ public class Player : Character
 {
     private void Awake()
     {
-        _camera = Camera.main;
+        _cam = Camera.main;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
     {
-        
+        GameManager.Character.player = this;
     }
 
     private void FixedUpdate()
     {
-        ApplyMovement(_inputPos);
+        Movement(_inputPos);
     }
 
-    public void OnMove(InputValue value)
+    private void OnMove(InputValue InValue)
     {
-        _inputPos = value.Get<Vector2>().normalized;
+        _inputPos = InValue.Get<Vector2>().normalized;
     }
 
-    public void OnLook(InputValue value)
+    private void OnLook(InputValue InValue)
     {
-        Vector2 newAim = value.Get<Vector2>();
-        Vector2 worldPos = _camera.ScreenToWorldPoint(newAim);
+        Vector2 newAim = InValue.Get<Vector2>();
+        Vector2 worldPos = _cam.ScreenToWorldPoint(newAim);
         newAim = (worldPos - (Vector2)transform.position).normalized;
 
         _spriteRenderer.flipX = newAim.x > 0 ? true : false;
-    }
-
-    protected void ApplyMovement(Vector2 direction)
-    {
-        direction = direction * 5;
-
-        _rigidbody2D.velocity = direction;
     }
 }
