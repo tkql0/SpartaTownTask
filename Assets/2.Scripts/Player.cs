@@ -1,37 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : Character
 {
-    public GameObject player;
-
-    private Animator _anim;
-
-    public Vector2 inputVector;
-    public float speed = 0.0f;
-
-    public void OnEnable()
+    private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        _anim = GetComponent<Animator>();
-
-        speed = 10;
+        _camera = Camera.main;
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
     {
-        Move();
+        
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
-        float vertical = Input.GetAxisRaw("Vertical");
-        float horizontal = Input.GetAxisRaw("Horizontal");
+        ApplyMovement(_inputPos);
+    }
 
-        Vector2 inputVector = new Vector2(horizontal, vertical).normalized;
+    public void OnMove(InputValue value)
+    {
+        _inputPos = value.Get<Vector2>().normalized;
+    }
 
-        rigidbody2D.velocity = inputVector * speed;
+    public void OnLook(InputValue value)
+    {
+        Vector2 newAim = value.Get<Vector2>();
+        Vector2 worldPos = _camera.ScreenToWorldPoint(newAim);
+        newAim = (worldPos - (Vector2)transform.position).normalized;
+
+        _spriteRenderer.flipX = newAim.x > 0 ? true : false;
+    }
+
+    protected void ApplyMovement(Vector2 direction)
+    {
+        direction = direction * 5;
+
+        _rigidbody2D.velocity = direction;
     }
 }

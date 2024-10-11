@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class CharacterControl
 {
+    public Player player;
+
     public void OnEnable()
     {
         
