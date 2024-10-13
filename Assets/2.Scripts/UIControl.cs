@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class UIControl
 {
-    public string playerName = null;
-
-    public bool isStart;
+    //public string playerName = null;
 
     public void OnEnable()
     {
         SetGameStop();
-
-        isStart = false;
     }
 
     private void OnDisable()

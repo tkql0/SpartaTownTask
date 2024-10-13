@@ -471,6 +471,7 @@ MonoBehaviour:
   spriteImage:
   - {fileID: 510625735, guid: 4e2a82e832931c34eac5f2fa012f9f5f, type: 3}
   - {fileID: 617557619, guid: 7c1128f38afb65b43ad838c64018367c, type: 3}
+  name: {fileID: 3429631094634231389}
 --- !u!114 &8872741121542635344
 MonoBehaviour:
   m_ObjectHideFlags: 0

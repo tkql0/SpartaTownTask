@@ -6,6 +6,4 @@ using TMPro;
 public class MainUI : MonoBehaviour
 {
     public TMP_Text text;
-
-
 }

@@ -7,6 +7,8 @@ public class Character : MonoBehaviour
     protected Rigidbody2D _rigidbody2D;
     protected SpriteRenderer _spriteRenderer;
 
+    protected Animator _animator;
+
     protected Vector2 _inputPos = Vector2.zero;
     public Camera _cam;
 

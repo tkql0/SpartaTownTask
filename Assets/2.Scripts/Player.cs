@@ -1,25 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player : Character
 {
-    public RuntimeAnimatorController[] animCon;
-    public Sprite[] spriteImage;
+    [SerializeField]
+    private RuntimeAnimatorController[] animCon;
+    [SerializeField]
+    private Sprite[] spriteImage;
 
-    Animator anim;
+    public TMP_Text name;
 
     private void Awake()
     {
         _cam = Camera.main;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        anim = GetComponentInChildren<Animator>();
-    }
-
-    public void PlayerSelect(int InId)
-    {
-        _spriteRenderer.sprite = spriteImage[InId];
-        anim.runtimeAnimatorController = animCon[InId];
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -30,6 +27,12 @@ public class Player : Character
     private void FixedUpdate()
     {
         Movement(_inputPos);
+    }
+
+    public void PlayerSelect(int InKey)
+    {
+        _spriteRenderer.sprite = spriteImage[InKey];
+        _animator.runtimeAnimatorController = animCon[InKey];
     }
 
     private void OnMove(InputValue InValue)
@@ -44,6 +47,5 @@ public class Player : Character
         newAim = (worldPos - (Vector2)transform.position).normalized;
 
         _spriteRenderer.flipX = newAim.x > 0 ? true : false;
-        // 위에 코드를 남긴 이유는 시간이 남는다면 공격도 넣어볼까해서
     }
 }
