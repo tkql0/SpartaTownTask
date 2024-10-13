@@ -4,20 +4,22 @@ using UnityEngine.InputSystem;
 public class Player : Character
 {
     public RuntimeAnimatorController[] animCon;
+    public Sprite[] spriteImage;
 
     Animator anim;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
         _cam = Camera.main;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
     }
 
-    private void OnEnable()
+    public void PlayerSelect(int InId)
     {
-        anim.runtimeAnimatorController = animCon[GameManager.Character.playerId];
+        _spriteRenderer.sprite = spriteImage[InId];
+        anim.runtimeAnimatorController = animCon[InId];
     }
 
     private void Update()
