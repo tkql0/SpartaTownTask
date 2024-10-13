@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class SubUI : MonoBehaviour
 {
-    public void CharacterSelect()
+    public void CharacterSelect(int InId)
     {
-        
+        GameManager.Character.playerId = InId;
     }
+
     public void NameInput()
     {
 
