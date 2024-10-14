@@ -26,7 +26,7 @@ public class Player : Character
     private void Update()
     {
         GameManager.Character.player = this;
-        //ObjectScan();
+        ObjectScan();
     }
 
     private void FixedUpdate()
@@ -56,7 +56,9 @@ public class Player : Character
             return;
 
          _inTarget[0].transform.TryGetComponent<NPC>(out var OutNPC);
-        //OutNPC.TalkButton(true);
+
+        if(!OutNPC.isButtonSpawn)
+            OutNPC.ButtonSpawn();
         // TODO :: 대화버튼 활성화
     }
 
