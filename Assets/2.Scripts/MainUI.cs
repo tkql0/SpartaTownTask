@@ -16,6 +16,15 @@ public class MainUI : MonoBehaviour
 
     public void ButtonClick()
     {
-        GameManager.UI.SetGameStop();
+        GameManager.UI.isStop = !GameManager.UI.isStop;
+        if(GameManager.UI.isStop)
+            GameManager.UI.SetGameStop();
+        else
+            GameManager.UI.SetGameStart();
+    }
+
+    public void TalkText()
+    {
+
     }
 }

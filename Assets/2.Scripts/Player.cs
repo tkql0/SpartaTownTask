@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEditor.U2D.Animation;
 
 public class Player : Character
 {
@@ -10,6 +11,9 @@ public class Player : Character
     private Sprite[] spriteImage;
 
     public TMP_Text name;
+    public RaycastHit2D[] _inTarget;
+    public LayerMask targetMask;
+    public Camera _cam;
 
     private void Awake()
     {
@@ -22,6 +26,7 @@ public class Player : Character
     private void Update()
     {
         GameManager.Character.player = this;
+        //ObjectScan();
     }
 
     private void FixedUpdate()
@@ -35,7 +40,27 @@ public class Player : Character
         _animator.runtimeAnimatorController = animCon[InKey];
     }
 
-    private void OnMove(InputValue InValue)
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.black;
+
+        Gizmos.DrawSphere(transform.position, 5f);
+    }
+
+    private void ObjectScan()
+    {
+        _inTarget = Physics2D.CircleCastAll(transform.position,
+            5f, Vector2.zero, 0, targetMask);
+
+        if (_inTarget.Length == 0)
+            return;
+
+         _inTarget[0].transform.TryGetComponent<NPC>(out var OutNPC);
+        //OutNPC.TalkButton(true);
+        // TODO :: 대화버튼 활성화
+    }
+
+        private void OnMove(InputValue InValue)
     {
         _inputPos = InValue.Get<Vector2>().normalized;
     }

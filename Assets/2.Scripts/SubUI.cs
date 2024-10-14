@@ -21,5 +21,6 @@ public class SubUI : MonoBehaviour
     { // 캐릭터 이름 버튼 메서드
         GameManager.Character.player.name.text = playerNameInput.text;
         GameManager.UI.SetGameStart();
+        GameManager.UI.isStop = !GameManager.UI.isStop;
     }
 }

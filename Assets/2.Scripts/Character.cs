@@ -10,7 +10,6 @@ public class Character : MonoBehaviour
     protected Animator _animator;
 
     protected Vector2 _inputPos = Vector2.zero;
-    public Camera _cam;
 
     protected void Movement(Vector2 InDirection)
     {

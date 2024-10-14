@@ -6,6 +6,8 @@ public class UIControl
 {
     //public string playerName = null;
 
+    public bool isStop = true;
+
     public void OnEnable()
     {
         SetGameStop();
